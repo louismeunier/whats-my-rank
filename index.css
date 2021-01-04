@@ -20,3 +20,8 @@ form {
 #updated {
     color: blue;
 }
+
+a {
+    text-decoration: underline;
+    color: gray;
+}
