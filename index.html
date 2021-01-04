@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What would be my rank?</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+    <h1>What's my Rank?</h1>
+    <hr>
+    <h2>A super quick way to check the world rank of any event and any time</h2>
+    <h3>Check out the source code at my <a href="https://github.com/louismeunier/" target="_blank">Github</a></h3>
+    <form id="rank-form">
+        <h4><i>Please enter time in terms of centiseconds (ie, xx.yy). All inputs rounded to nearest centisecond.</i></h4>
+        <input id="time-input" type="number" step="0.01" placeholder="time" required>
+        <select id="event-select" value="event-type">
+            <option value="222" >222</option>
+            <option value="333" selected>333</option>
+            <option value="333bf">333bf</option>
+            <option value="333fm">333fm</option>
+            <option value="333oh">333oh</option>
+            <option value="444">444</option>
+            <option value="555">555</option>
+            <option value="666">666</option>
+            <option value="777">777</option>
+            <option value="sq1">sq1</option>
+            <option value="skewb">skewb</option>
+            <option value="pyram">pyram</option>
+            <option value="minx">minx</option>
+            <option value="clock">clock</option>
+            <option value="444bf">444bf</option>
+            <option value="555bf">555bf</option>
+        </select>
+        <select id="type-select" value="type-select">
+            <option value="singles">single</option>
+            <option value="averages">mean/average</option>
+        </select>
+        <input type="submit">
+    </form>
+    <div id="res">
+        <h3 id="res-rank"></h1>
+    </div>
+    <div id="disclaimer">
+        <img src="https://www.travis-ci.com/louismeunier/wca-stats-helper.svg?branch=main">
+        <p>
+            <i>This information is based on competition results owned and maintained by the World Cube Assocation, published at <a href="https://worldcubeassociation.org/results" target="_blank">https://worldcubeassociation.org/results</a> as of <span id="updated">January 3, 2021.</span></i>
+        </p>
+    </div>
+
+</body>
+<script src="js/index.js"></script>
+</html>
