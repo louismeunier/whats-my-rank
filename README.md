@@ -5,3 +5,4 @@ A cubing utility to check the rank of any time, in any event (except mbld, for n
 ### To Do
  -  [ ] Implement rankings by country
  -  [ ] Show who you tie with, are just beaten by, and are beating
+ -  [ ] Allow input with minutes
