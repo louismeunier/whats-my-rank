@@ -14,6 +14,30 @@ function ordinal_suffix_of(i) {
     return i + "th";
 }
 
+function getRawRank(t, times,i) {
+    //Check if best/worst
+    if (t<times[0]) {
+        return 1;
+    }
+    if (t>times[times.length-1]) {
+        return times.length;
+    }
+
+    else {
+        var rank = times.indexOf(Math.floor(t));
+        if (rank==-1) {
+            //Find closest higher rank; wow recursion!!!
+            return getRawRank(Math.floor(t+1),times, i+1);
+        }
+        else {
+            if (i==0) {
+                //Check if tied; will only be tied if recursion doesn't occur, ie, i is never incremented
+                return rank+1;
+            }
+            return rank+1;
+        }
+    }
+}
 function getRank(t, times,i) {
     //Check if best/worst
     if (t<times[0]) {
@@ -62,8 +86,9 @@ function addListeners() {
             .then(res=>res.json())
             .then(resJ=>{
                 var times = resJ.data.map((x) => x.best);
-                document.querySelector("#res-rank").innerText = getRank(inputT*100,times, 0);
-                //console.log(getRank(inputT*100,times, 0))
+                document.querySelector("#res-rank").innerText = getRank(Math.floor(inputT*100),times, 0);
+                //var rank =  getRawRank(Math.floor(inputT*100),times, 0);
+                //createResultsTable(Math.floor(inputT*100),rank,times,resJ.data);
             });
         event.preventDefault()
     })
@@ -79,5 +104,52 @@ function lastUpdated() {
             document.querySelector("#updated").innerText= uDate.toString();
         });
 }
+
+function createResultsTable(cur, rank, time, people) {
+    var table = document.querySelector("#res > table > tbody");
+    console.log(rank);
+    
+    //next fastest
+    //console.log(time[rank-2]);
+    //console.log(people[rank-2]);
+    var betterRow = document.createElement("tr");
+    var betterRank = document.createElement("td");
+    betterRank.innerText = rank-1;
+    var betterTime = document.createElement("td");
+    betterTime.innerText = time[rank-1];
+   //var betterPerson = document.createAttribute("td");
+   betterRow.appendChild(betterRank);
+    betterRow.appendChild(betterTime);
+   
+
+    //same time
+    var sameRow = document.createElement("tr");
+    var sameRank = document.createElement("td");
+    sameRank.innerText = rank;
+    var sameTime = document.createElement("td");
+    sameTime.innerText = cur;
+    sameRow.appendChild(sameRank);
+    sameRow.appendChild(sameTime);
+    
+
+    //next slowest/tied
+   // console.log(time[rank-1]);
+    //console.log(people[rank-1]);
+    var worseRow = document.createElement("tr");
+    var worseRank = document.createElement("td");
+    worseRank.innerText = rank+1;
+    var worseTime = document.createElement("td");
+    worseTime.innerText = time[rank+1];
+   //var worsePerson = document.createAttribute("td");
+   worseRow.appendChild(worseRank);
+    worseRow.appendChild(worseTime);
+    
+    table.appendChild(betterRow);
+    table.appendChild(sameRow);
+    table.appendChild(worseRow);
+    
+    document.querySelector("#res > table").style.display = "block";
+}
+
 document.addEventListener("DOMContentListener",addListeners());
 document.addEventListener("DOMContentListener",lastUpdated());

@@ -25,3 +25,9 @@ a {
     text-decoration: underline;
     color: gray;
 }
+
+#res table {
+    display: none;
+    text-align: center;
+    padding: 50px;
+}
