@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What would be my rank?</title>
+    <link rel="shortcut icon" type="image/jpg" href="favicon.png"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="index.css">
@@ -17,22 +18,22 @@
         <h4><i>Please enter time in terms of centiseconds (ie, xx.yy). All inputs rounded to nearest centisecond.</i></h4>
         <input id="time-input" type="number" step="0.01" placeholder="time" required>
         <select id="event-select" value="event-type">
-            <option value="222" >222</option>
-            <option value="333" selected>333</option>
-            <option value="333bf">333bf</option>
-            <option value="333fm">333fm</option>
-            <option value="333oh">333oh</option>
-            <option value="444">444</option>
-            <option value="555">555</option>
-            <option value="666">666</option>
-            <option value="777">777</option>
-            <option value="sq1">sq1</option>
-            <option value="skewb">skewb</option>
-            <option value="pyram">pyram</option>
-            <option value="minx">minx</option>
-            <option value="clock">clock</option>
-            <option value="444bf">444bf</option>
-            <option value="555bf">555bf</option>
+            <option value="222" >2x2</option>
+            <option value="333" selected>3x3</option>
+            <option value="333bf">3x3 bld</option>
+            <option value="333fm">FMC</option>
+            <option value="333oh">OH</option>
+            <option value="444">4x4</option>
+            <option value="555">5x5</option>
+            <option value="666">6x6</option>
+            <option value="777">7x7</option>
+            <option value="sq1">Square-1</option>
+            <option value="skewb">Skewb</option>
+            <option value="pyram">Pyraminx</option>
+            <option value="minx">Megaminx</option>
+            <option value="clock">Clock</option>
+            <option value="444bf">4x4 bld</option>
+            <option value="555bf">5x5 bld</option>
         </select>
         <select id="type-select" value="type-select">
             <option value="singles">single</option>
@@ -42,6 +43,17 @@
     </form>
     <div id="res">
         <h3 id="res-rank"></h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Result</th>
+                    <th>WCA ID</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </div>
     <div id="disclaimer">
         <p>
