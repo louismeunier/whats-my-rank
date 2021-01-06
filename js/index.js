@@ -14,13 +14,31 @@ function ordinal_suffix_of(i) {
     return i + "th";
 }
 
+function formatRank(t, rA, times) {
+    var r = rA[0];
+    var i = Math.floor(rA[1]);
+    if (t<times[0]) {
+        return `1st, ${(times[0]-t)/100} seconds faster than current.`;
+    }
+    else if (t>times[times.length-1]) {
+        return `${ordinal_suffix_of(times.length)}, ${(times[times.length-1])/100} seconds slower than current 🤮`;
+    }
+    else if (i==0) {
+        //Check if tied; will only be tied if recursion doesn't occur, ie, i is never incremented
+        return `Tied for ${ordinal_suffix_of(r)}`;
+     }
+     else {
+        return `${ordinal_suffix_of(r)}, ${i/100} seconds faster than current.`;
+     }
+}
+
 function getRawRank(t, times,i) {
     //Check if best/worst
     if (t<times[0]) {
-        return 1;
+        return [1,i];
     }
     if (t>times[times.length-1]) {
-        return times.length;
+        return [times.length,i];
     }
 
     else {
@@ -32,33 +50,9 @@ function getRawRank(t, times,i) {
         else {
             if (i==0) {
                 //Check if tied; will only be tied if recursion doesn't occur, ie, i is never incremented
-                return rank+1;
+                return [rank+1,i];
             }
-            return rank+1;
-        }
-    }
-}
-function getRank(t, times,i) {
-    //Check if best/worst
-    if (t<times[0]) {
-        return `1st, ${(times[0]-t)/100} seconds faster than current.`;
-    }
-    if (t>times[times.length-1]) {
-        return `${ordinal_suffix_of(times.length)}, ${(times[times.length-1])/100} seconds slower than current 🤮`;
-    }
-
-    else {
-        var rank = times.indexOf(t);
-        if (rank==-1) {
-            //Find closest higher rank; wow recursion!!!
-            return getRank(Math.floor(t+1),times, i+1);
-        }
-        else {
-            if (i==0) {
-                //Check if tied; will only be tied if recursion doesn't occur, ie, i is never incremented
-                return `Tied for ${ordinal_suffix_of(rank+1)}`;
-            }
-            return `${ordinal_suffix_of(rank+1)}, ${i/100} seconds faster than current.`;
+            return [rank+1,i];
         }
     }
 }
@@ -86,9 +80,7 @@ function addListeners() {
             .then(res=>res.json())
             .then(resJ=>{
                 var times = resJ.data.map((x) => x.best);
-                document.querySelector("#res-rank").innerText = getRank(Math.floor(inputT*100),times, 0);
-                //var rank =  getRawRank(Math.floor(inputT*100),times, 0);
-                //createResultsTable(Math.floor(inputT*100),rank,times,resJ.data);
+                document.querySelector("#res-rank").innerText = formatRank(Math.floor(inputT*100),getRawRank(Math.floor(inputT*100),times, 0), times);
             });
         event.preventDefault()
     })
