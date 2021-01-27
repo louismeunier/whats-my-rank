@@ -1,5 +1,5 @@
 ## What's My Rank
-
+# ARCHIVED - See new repo in my profile
 A cubing utility to check the rank of any time, in any event (except mbld, for now). It makes use of https://github.com/louismeunier/wca-stats-helper/tree/main to get rankings/times.
 
 ### Image Credits
